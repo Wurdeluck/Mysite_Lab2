@@ -8,7 +8,7 @@ from attendance.models import Statistics
 
 
 class StudentAdmin(admin.ModelAdmin):
-    fields = ['student id', 'name']
+    fields = ['st_id', 'name']
     list_display = ('st_id', 'name')
 
 admin.site.register(Student, StudentAdmin)
@@ -22,7 +22,7 @@ admin.site.register(Score, ScoreAdmin)
 
 
 class SubjectAdmin(admin.ModelAdmin):
-    fields = ['subject id', 'name']
+    fields = ['su_id', 'name']
     list_display = ('su_id', 'name')
 
 admin.site.register(Subject, SubjectAdmin)
