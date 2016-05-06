@@ -3,9 +3,17 @@ from django.db import models
 
 # Create your models here.
 class Student(models.Model):
+    st_id = models.IntegerField()
     name = models.CharField(
         max_length=255,
     )
+    group = models.CharField(
+        max_length=255,
+    )
+    age = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
 
 
 class Statistics(models.Model):
@@ -13,12 +21,19 @@ class Statistics(models.Model):
 
 
 class Subject(models.Model):
-    subject = models.CharField(
+    su_id = models.IntegerField()
+    name = models.CharField(
         max_length=255,
     )
 
+    def __unicode__(self):
+        return self.name
+
 
 class Score(models.Model):
-    score = models.CharField(
-        max_length=3,
-    )
+    student_id = models.IntegerField()
+    subject_id = models.IntegerField()
+    score = models.IntegerField()
+
+    def __unicode__(self):
+        return self.score
