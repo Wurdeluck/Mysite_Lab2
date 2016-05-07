@@ -2,38 +2,37 @@ from django.db import models
 
 
 # Create your models here.
-class Student(models.Model):
-    st_id = models.IntegerField()
+
+
+class Author(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    group = models.CharField(
-        max_length=255,
-    )
-    age = models.IntegerField()
+    birth_year = models.PositiveIntegerField(null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
-class Statistics(models.Model):
-    gpa = models.IntegerField()
-
-
-class Subject(models.Model):
-    su_id = models.IntegerField()
+class Genre(models.Model):
     name = models.CharField(
         max_length=255,
     )
 
-    def __unicode__(self):
+    # def count_gpas(self):
+    #     return sum([x for x in range(10)])
+    #
+    def __str__(self):
         return self.name
 
 
-class Score(models.Model):
-    student_id = models.IntegerField()
-    subject_id = models.IntegerField()
-    score = models.IntegerField()
+class Book(models.Model):
+    genre = models.ForeignKey(Genre)
+    author = models.ForeignKey(Author)
+    name = models.CharField(
+        max_length=255,
+    )
+    pages = models.PositiveIntegerField()
 
-    def __unicode__(self):
-        return self.score
+    def __str__(self):
+        return self.name

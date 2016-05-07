@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+        <div class="container">
+            <h1 style="text-align:center;">Лабораторная работа № 2</h1>
+            <h2>БИБЛИОТЕКА</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Название книги</th>
+                  <th>Автор</th>
+                  <th>Жанр</th>
+                </tr>
+                </thead>
+                <tbody>
+                   {% for book in books %}
+                        <tr>
+                            <td scope="row">{{book.name}}</td>
+                            <td>{{book.author}}</td>
+                            <td>{{book.genre}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Автор</th>
+                  <th>Год рождения</th>
+                </tr>
+                </thead>
+                <tbody>
+                   {% for author in authors %}
+                        <tr>
+                            <td scope="row">{{author.name}}</td>
+                            <td>{{author.birth_year}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Название жанра</th>
+                </tr>
+                </thead>
+                <tbody>
+                   {% for genre in genres %}
+                        <tr>
+                            <td scope="row">{{genre.name}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+	</body>
+</html>

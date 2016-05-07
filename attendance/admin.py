@@ -1,31 +1,26 @@
 from django.contrib import admin
 
 # Register your models here.
-from attendance.models import Student
-from attendance.models import Score
-from attendance.models import Subject
-from attendance.models import Statistics
+from attendance.models import Book
+from attendance.models import Author
+from attendance.models import Genre
 
 
-class StudentAdmin(admin.ModelAdmin):
-    fields = ['st_id', 'name']
-    list_display = ('st_id', 'name')
+class BookAdmin(admin.ModelAdmin):
+    fields = ['genre', 'author', 'name', 'pages']
+    list_display = ('genre', 'author', 'name', 'pages')
 
-admin.site.register(Student, StudentAdmin)
-
-
-class ScoreAdmin(admin.ModelAdmin):
-    fields = ['student_id', 'subject_id', 'score']
-    list_display = ('student_id', 'subject_id', 'score')
-
-admin.site.register(Score, ScoreAdmin)
+admin.site.register(Book, BookAdmin)
 
 
-class SubjectAdmin(admin.ModelAdmin):
-    fields = ['su_id', 'name']
-    list_display = ('su_id', 'name')
+class AuthorAdmin(admin.ModelAdmin):
+    fields = ['name', 'birth_year']
+    list_display = ('name', 'birth_year')
+    # exclude = ('student_id', 'subject_id',)
 
-admin.site.register(Subject, SubjectAdmin)
+admin.site.register(Author, AuthorAdmin)
 
 
-admin.site.register(Statistics)
+admin.site.register(Genre)
+
+
