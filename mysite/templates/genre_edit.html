@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% extends 'index.html' %}
+    {% block content %}
+        <div class="post">
+            <a class="btn btn-default" href="{% url 'genre_edit' pk=genre.pk  %}">
+                <h1>{{ genre.name }}</h1>
+        </div>
+    {% endblock %}
+    </title>
+</head>

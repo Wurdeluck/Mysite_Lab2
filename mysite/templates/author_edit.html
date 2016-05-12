@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% extends 'index.html' %}
+    {% block content %}
+        <div class="post">
+            <a class="btn btn-default" href="{% url 'author_edit' pk=author.pk %}">
+            <h1>{{ author.name }}</h1>
+                <h1>{{ author.birth_year }}</h1>
+        </div>
+    {% endblock %}
+    </title>
+</head>

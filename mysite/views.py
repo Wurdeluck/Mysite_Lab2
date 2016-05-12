@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.views.generic.base import TemplateView
+from django.shortcuts import render, redirect, get_object_or_404
 import random
 import numpy
 from django.db import models
 from attendance.models import Book
 from attendance.models import Author
 from attendance.models import Genre
+from .forms import AuthorForm
+from .forms import GenreForm
+from .forms import BookForm
 
 
 class IndexView(TemplateView):
@@ -15,27 +19,9 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context.update(
             {
-                'books':
-                    [
-                        {
-                            'name': book.name,
-                            'author': book.author,
-                            'genre': book.genre,
-                        } for book in Book.objects.all()
-                    ],
-                'authors':
-                    [
-                        {
-                            'name': author.name,
-                            'birth_year': author.birth_year,
-                        } for author in Author.objects.all()
-                        ],
-                'genres':
-                    [
-                        {
-                            'name': genre.name,
-                        } for genre in Genre.objects.all()
-                        ],
+                'books': Book.objects.all(),
+                'authors': Author.objects.all(),
+                'genres':  Genre.objects.all(),
 
             }
         )
@@ -105,6 +91,94 @@ scores = [Score(student_id=student.id, subject_id=subject.id, value=random.randi
 
 best = [student.person for student in students if student.count_gpas() >= 4.5]
 worst = [student.person for student in students if student.count_gpas() <= 2.5]
+
+
+def author_new(request):
+    form = AuthorForm(request.POST)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.save()
+        return redirect('/')
+    else:
+        form = AuthorForm()
+    return render(request, 'author_new.html', {'form': form})
+
+
+def book_new(request):
+    form = BookForm(request.POST)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.save()
+        return redirect('/')
+    else:
+        form = BookForm()
+    return render(request, 'book_new.html', {'form': form})
+
+
+def genre_new(request):
+    form = GenreForm(request.POST)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.save()
+        return redirect('/')
+    else:
+        form = GenreForm()
+    return render(request, 'genre_new.html', {'form': form})
+
+
+def author_edit(request, pk):
+    author = Author.objects.get(pk=pk)
+    if request.method == "POST":
+        form = AuthorForm(request.POST, instance=author)
+        if form.is_valid():
+            # author = form.save(commit=False)
+            form.save()
+            return redirect('/')
+    else:
+        form = AuthorForm(instance=author)
+    return render(request, 'author_new.html', {'form': form})
+
+
+def book_edit(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            book = form.save(commit=False)
+            form.save()
+            return redirect('/')
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'book_new.html', {'form': form})
+
+
+def genre_edit(request, pk):
+    print(11111111111111)
+    genre = get_object_or_404(Genre, pk=pk)
+    if request.method == "POST":
+        form = GenreForm(request.POST, instance=genre)
+        if form.is_valid():
+            genre = form.save(commit=False)
+            form.save()
+            return redirect('/')
+    else:
+        form = GenreForm(instance=genre)
+    return render(request, 'genre_new.html', {'form': form})
+
+
+def author_delete(request, pk):
+    delete = get_object_or_404(Author, pk=pk)
+    if request.method == "POST":
+        form = AuthorForm(request.POST, instance=delete)
+        if form.is_valid():
+            # delete = form.save(commit=False)
+            delete.delete()
+            return redirect('/')
+    else:
+        form = AuthorForm(instance=delete)
+    return render(request, 'author_new.html', {'form': form})
+
+
 
 
 

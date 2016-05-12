@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% extends 'index.html' %}
+    {% block content %}
+        <div> class="post">
+            <a class="btn btn-default" href="{% url 'book_edit' pk=book.pk %}">
+                <h1>{{ book.name }}</h1>
+                <h1>{{ book.author }}</h1>
+                <h1>{{ book.genre }}</h1>
+                <h1>{{ book.pages }}</h1>
+        </div>
+        <div> class="post">
+            <a class="btn btn-default" href="{% url 'book_edit' pk=book.pk %}">
+        </div>
+    {% endblock %}
+    </title>
+</head>

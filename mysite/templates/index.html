@@ -9,14 +9,30 @@
 	</head>
 	<body>
         <div class="container">
-            <h1 style="text-align:center;">Лабораторная работа № 2</h1>
+            <h1 style="text-align:center;">Лабораторная работа № 3</h1>
             <h2>БИБЛИОТЕКА</h2>
+                <body>
+            <form action="{% url 'views.author_new' %}">
+            <button type="submit">Создать запись о новом авторе</button>
+            </form>
+            <body>
+            <form action="{% url 'views.book_new' %}">
+            <button type="submit">Создать запись о новой книге</button>
+            </form>
+            <form action="{% url 'views.genre_new' %}">
+            <button type="submit">Создать запись о новом жанре</button>
+            </form>
+             {% block content %}
+             {% endblock %}
+            </body>
             <table class="table table-striped">
                 <thead>
                 <tr>
                   <th>Название книги</th>
                   <th>Автор</th>
                   <th>Жанр</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +41,13 @@
                             <td scope="row">{{book.name}}</td>
                             <td>{{book.author}}</td>
                             <td>{{book.genre}}</td>
+                            <td>{{book.delete}}</td>
+                            <td><form action="/book_edit/{{book.id}}/">
+                            <button type="submit">EDIT</button>
+                            </form></td>
+                            <td><form action="/book_delete/{{book.id}}/">
+                            <button type="submit">DELETE</button>
+                            </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -34,6 +57,8 @@
                 <tr>
                   <th>Автор</th>
                   <th>Год рождения</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +66,12 @@
                         <tr>
                             <td scope="row">{{author.name}}</td>
                             <td>{{author.birth_year}}</td>
+                            <td><form action="/author_edit/{{author.id}}/">
+                            <button type="submit">EDIT</button>
+                            </form></td>
+                            <td><form action="/author_delete/{{author.id}}/">
+                            <button type="submit">DELETE</button>
+                            </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -49,12 +80,21 @@
             <thead>
                 <tr>
                   <th>Название жанра</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                    {% for genre in genres %}
                         <tr>
                             <td scope="row">{{genre.name}}</td>
+
+                            <td><form action="/genre_edit/{{genre.id}}/">
+                            <button type="submit">EDIT</button>
+                            </form></td>
+                            <td><form action="/genre_delete/{{genre.id}}/">
+                            <button type="submit">DELETE</button>
+                            </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
